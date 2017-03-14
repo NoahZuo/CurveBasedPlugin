@@ -10,6 +10,7 @@ namespace ECurveType
 		CT_DoNotUseCurve = 0,
 		LD_UseFloatCurve,
 		LD_UseVectorCurve,
+		LD_UseLinearColorCurve, 
 	};
 }
 
@@ -48,6 +49,42 @@ struct FFloatCurveData
 
 		return result;
 	
+	}
+};
+
+
+USTRUCT(BlueprintType)
+struct FLinearColorCurveData
+{
+	GENERATED_USTRUCT_BODY()
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
+	class UCurveLinearColor* LinearColorCurve;
+
+	float TimeElapsed;
+
+	virtual FVector GetCurveValue()
+	{
+		FLinearColor result;
+		if (LinearColorCurve)
+		{
+			float minTime, maxTime;
+			LinearColorCurve->GetTimeRange(minTime, maxTime);
+
+			if (maxTime - minTime <= TIMETOLERANCE)
+				return result;
+
+			while (TimeElapsed >= maxTime)
+			{
+				TimeElapsed -= maxTime;
+			}
+
+			result = LinearColorCurve->GetLinearColorValue(TimeElapsed);
+		}
+
+		return result;
+
 	}
 };
 
@@ -97,6 +134,9 @@ struct FSelectableCurveData
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
 	class UCurveVector* VectorCurve;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
+	class UCurveLinearColor* LinearColorCurve;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
 	TEnumAsByte<ECurveType::Type> CurveType;
@@ -149,6 +189,29 @@ struct FSelectableCurveData
 		return result;
 
 	}
+
+	virtual FVector GetLinearColorCurveValue()
+	{
+		FLinearColor result;
+		if (LinearColorCurve)
+		{
+			float minTime, maxTime;
+			LinearColorCurve->GetTimeRange(minTime, maxTime);
+
+			if (maxTime - minTime <= TIMETOLERANCE)
+				return result;
+
+			while (TimeElapsed >= maxTime)
+			{
+				TimeElapsed -= maxTime;
+			}
+
+			result = LinearColorCurve->GetLinearColorValue(TimeElapsed);
+		}
+
+		return result;
+	}
+
 };
 
 USTRUCT(BlueprintType)

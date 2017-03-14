@@ -51,6 +51,8 @@ void UCurveBasedPointLightComponent::UpdateMaterialParameter(float DeltaTime)
 			case ECurveType::LD_UseVectorCurve:
 				DMI->SetVectorParameterValue(itr.Parameter, itr.GetVectorCurveValue());
 				break;
+			case ECurveType::LD_UseLinearColorCurve:
+				DMI->SetVectorParameterValue(itr.Parameter, itr.GetLinearColorCurveValue());
 			}
 		}
 	}

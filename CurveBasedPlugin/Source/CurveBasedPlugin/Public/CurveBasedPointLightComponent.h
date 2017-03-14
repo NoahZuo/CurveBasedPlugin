@@ -26,7 +26,7 @@ class CURVEBASEDPLUGIN_API UCurveBasedPointLightComponent : public UPointLightCo
 	FFloatCurveData IntensityCurve;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
-	FVectorCurveData ColorCurve;
+	FLinearColorCurveData ColorCurve;
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	virtual void OnRegister() override;

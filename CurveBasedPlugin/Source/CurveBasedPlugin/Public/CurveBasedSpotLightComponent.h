@@ -31,7 +31,7 @@ class CURVEBASEDPLUGIN_API UCurveBasedSpotLightComponent : public USpotLightComp
 	FFloatCurveData IntensityCurve;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
-	FVectorCurveData ColorCurve;
+	FLinearColorCurveData ColorCurve;
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	virtual void OnRegister() override;
