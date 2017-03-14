@@ -1,0 +1,9 @@
+{
+	"Changelist" : 3249277,
+	"CompatibleChangelist" : 3195953,
+	"BuildId" : "0c836052-c117-40fc-8c59-f025b3d99981",
+	"Modules" : 
+	{
+		"CurveBasedPlugin" : "UE4Editor-CurveBasedPlugin.dll"
+	}
+}
