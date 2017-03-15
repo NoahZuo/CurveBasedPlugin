@@ -28,6 +28,13 @@ class CURVEBASEDPLUGIN_API UCurveBasedPointLightComponent : public UPointLightCo
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
 	FLinearColorCurveData ColorCurve;
 
+	/*
+	* Use this as Light Function Please! 
+	*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
+	UMaterialInterface* LightFunction;
+
+
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	virtual void OnRegister() override;
 

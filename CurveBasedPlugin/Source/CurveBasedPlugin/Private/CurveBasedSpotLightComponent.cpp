@@ -67,11 +67,9 @@ void UCurveBasedSpotLightComponent::UpdateColor(float DeltaTime)
 void UCurveBasedSpotLightComponent::OnRegister()
 {
 	Super::OnRegister();
-	if (LightFunctionMaterial)
+	if (LightFunction)
 	{
-		auto mat = LightFunctionMaterial->GetMaterial();
-
-		DMI = UMaterialInstanceDynamic::Create(mat, this);
+		DMI = UMaterialInstanceDynamic::Create(LightFunction, this);
 		SetLightFunctionMaterial(DMI);
 	}
 	else
