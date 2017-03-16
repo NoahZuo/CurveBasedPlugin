@@ -72,22 +72,24 @@ void UCurveBasedSpotLightComponent::OnRegister()
 	Super::OnRegister();
 	if (LightFunctionMaterial)
 	{
-		auto tmpDMI = Cast<UMaterialInstanceDynamic>(LightFunctionMaterial);
-
-		if (tmpDMI)
-		{
-			DMI = UMaterialInstanceDynamic::Create(tmpDMI->Parent, this);
-			SetLightFunctionMaterial(DMI);
-		}
-		else
-		{
-			DMI = UMaterialInstanceDynamic::Create(LightFunctionMaterial, this);
-			SetLightFunctionMaterial(DMI);
-		}
+		DMI = UMaterialInstanceDynamic::Create(LightFunctionMaterial, this);
+		SetLightFunctionMaterial(DMI);
 	}
 	else
 	{
 		UseCurveLightFunction = false;
 		DMI = NULL;
 	}
+}
+
+void UCurveBasedSpotLightComponent::OnUnregister()
+{
+	Super::OnUnregister();
+
+	if (DMI)
+	{
+		SetLightFunctionMaterial(DMI->Parent);
+		DMI = NULL;
+	}
+
 }
