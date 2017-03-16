@@ -35,7 +35,7 @@ class CURVEBASEDPLUGIN_API UCurveBasedSpotLightComponent : public USpotLightComp
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	virtual void OnRegister() override;
-
+	virtual void OnUnregister() override;
 	
 
 private:

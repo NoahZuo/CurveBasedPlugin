@@ -96,3 +96,13 @@ void UCurveBasedPointLightComponent::OnRegister()
 	
 
 }
+
+void UCurveBasedPointLightComponent::OnUnregister()
+{
+	Super::OnUnregister();
+	if (DMI)
+	{
+		SetLightFunctionMaterial(DMI->Parent);
+		DMI = NULL;
+	}
+}
