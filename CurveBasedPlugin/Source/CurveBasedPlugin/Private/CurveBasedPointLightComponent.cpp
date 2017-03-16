@@ -73,10 +73,20 @@ void UCurveBasedPointLightComponent::OnRegister()
 {
 	Super::OnRegister();
 
-	if (LightFunction)
+	if (LightFunctionMaterial)
 	{
-		DMI = UMaterialInstanceDynamic::Create(LightFunction, this);
-		SetLightFunctionMaterial(DMI);
+		auto tmpDMI = Cast<UMaterialInstanceDynamic>(LightFunctionMaterial);
+
+		if (tmpDMI)
+		{
+			DMI = UMaterialInstanceDynamic::Create(tmpDMI->Parent, this);
+			SetLightFunctionMaterial(DMI);
+		}
+		else
+		{
+			DMI = UMaterialInstanceDynamic::Create(LightFunctionMaterial, this);
+			SetLightFunctionMaterial(DMI);
+		}
 	}
 	else
 	{

@@ -48,6 +48,9 @@ void UCurveBasedSpotLightComponent::UpdateMaterialParameter(float DeltaTime)
 			case ECurveType::LD_UseVectorCurve:
 				DMI->SetVectorParameterValue(itr.Parameter, itr.GetVectorCurveValue());
 				break;
+			case ECurveType::LD_UseLinearColorCurve:
+				DMI->SetVectorParameterValue(itr.Parameter, itr.GetLinearColorCurveValue());
+				break;
 			}
 		}
 	}
@@ -67,10 +70,20 @@ void UCurveBasedSpotLightComponent::UpdateColor(float DeltaTime)
 void UCurveBasedSpotLightComponent::OnRegister()
 {
 	Super::OnRegister();
-	if (LightFunction)
+	if (LightFunctionMaterial)
 	{
-		DMI = UMaterialInstanceDynamic::Create(LightFunction, this);
-		SetLightFunctionMaterial(DMI);
+		auto tmpDMI = Cast<UMaterialInstanceDynamic>(LightFunctionMaterial);
+
+		if (tmpDMI)
+		{
+			DMI = UMaterialInstanceDynamic::Create(tmpDMI->Parent, this);
+			SetLightFunctionMaterial(DMI);
+		}
+		else
+		{
+			DMI = UMaterialInstanceDynamic::Create(LightFunctionMaterial, this);
+			SetLightFunctionMaterial(DMI);
+		}
 	}
 	else
 	{
