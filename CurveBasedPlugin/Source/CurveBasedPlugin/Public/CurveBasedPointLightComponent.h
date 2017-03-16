@@ -30,7 +30,6 @@ class CURVEBASEDPLUGIN_API UCurveBasedPointLightComponent : public UPointLightCo
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	virtual void OnRegister() override;
-	virtual void OnUnregister() override;
 
 private:
 	UMaterialInstanceDynamic* DMI;
